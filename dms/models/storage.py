@@ -44,7 +44,7 @@ class Storage(models.Model):
         comodel_name="dms.directory",
         inverse_name="storage_id",
         string="Root Directories",
-        auto_join=False,
+        bypass_search_access=False,
         readonly=False,
         copy=False,
     )
@@ -52,7 +52,7 @@ class Storage(models.Model):
         comodel_name="dms.directory",
         inverse_name="storage_id",
         string="Directories",
-        auto_join=False,
+        bypass_search_access=False,
         readonly=True,
         copy=False,
     )
@@ -60,7 +60,7 @@ class Storage(models.Model):
         comodel_name="dms.file",
         inverse_name="storage_id",
         string="Files",
-        auto_join=False,
+        bypass_search_access=False,
         readonly=True,
         copy=False,
     )

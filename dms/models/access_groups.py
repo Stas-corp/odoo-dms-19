@@ -47,7 +47,7 @@ class DmsAccessGroups(models.Model):
         string="Directories",
         column1="gid",
         column2="aid",
-        auto_join=True,
+        bypass_search_access=True,
         readonly=True,
     )
     complete_directory_ids = fields.Many2many(
@@ -56,7 +56,7 @@ class DmsAccessGroups(models.Model):
         column1="gid",
         column2="aid",
         string="Complete directories",
-        auto_join=True,
+        bypass_search_access=True,
         readonly=True,
     )
     count_users = fields.Integer(compute="_compute_users", store=True)
@@ -94,7 +94,7 @@ class DmsAccessGroups(models.Model):
         column2="uid",
         string="Group Users",
         compute="_compute_users",
-        auto_join=True,
+        bypass_search_access=True,
         store=True,
         recursive=True,
     )
@@ -104,8 +104,8 @@ class DmsAccessGroups(models.Model):
         for record in self:
             record.count_directories = len(record.directory_ids)
 
-    _sql_constraints = [
-        ("name_uniq", "unique (name)", "The name of the group must be unique!")
+    _constraints = [
+        models.Constraint("name_uniq", "UNIQUE(name)", "The name of the group must be unique!"),
     ]
 
     @api.depends(
