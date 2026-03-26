@@ -1,37 +1,20 @@
+**Что сделано:**
 
-[![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/dms&target_branch=19.0)
-[![Pre-commit Status](https://github.com/OCA/dms/actions/workflows/pre-commit.yml/badge.svg?branch=19.0)](https://github.com/OCA/dms/actions/workflows/pre-commit.yml?query=branch%3A19.0)
-[![Build Status](https://github.com/OCA/dms/actions/workflows/test.yml/badge.svg?branch=19.0)](https://github.com/OCA/dms/actions/workflows/test.yml?query=branch%3A19.0)
-[![codecov](https://codecov.io/gh/OCA/dms/branch/19.0/graph/badge.svg)](https://codecov.io/gh/OCA/dms)
-[![Translation Status](https://translation.odoo-community.org/widgets/dms-19-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/dms-19-0/?utm_source=widget)
+| Изменение | Файлов |
+|-----------|--------|
+| Версии `18.0.x` → `19.0.x` | 7 manifest + pyproject.toml |
+| `groups_id` → `group_ids` | 6 файлов |
+| `self._cr` → `self.env.cr` | 1 файл |
+| `odoo.osv.expression` → `odoo.fields.Domain` | 6 файлов |
+| `read_group` → `_read_group` (новый API) | 1 файл |
+| `_sql_constraints` → `_constraints / models.Constraint` | 3 файла |
+| `type="json"` → `type="jsonrpc"` | 1 файл |
+| `auto_join=` → `bypass_search_access=` | 5 файлов |
+| `toggle_active` → `action_archive/action_unarchive` | 1 файл |
 
-<!-- /!\ do not modify above this line -->
+**Ветка:** `19.0-migration` — 3 коммита, все локально.
 
-# dms
-
-dms
-
-<!-- /!\ do not modify below this line -->
-
-<!-- prettier-ignore-start -->
-
-[//]: # (addons)
-
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
-
-[//]: # (end addons)
-
-<!-- prettier-ignore-end -->
-
-## Licenses
-
-This repository is licensed under [AGPL-3.0](LICENSE).
-
-However, each module can have a totally different license, as long as they adhere to Odoo Community Association (OCA)
-policy. Consult each module's `__manifest__.py` file, which contains a `license` key
-that explains its license.
-
-----
-OCA, or the [Odoo Community Association](http://odoo-community.org/), is a nonprofit
-organization whose mission is to support the collaborative development of Odoo features
-and promote its widespread use.
+**Что нужно сделать вручную:**
+1. `pip install pre-commit && pre-commit run -a` — форматирование кода (особенно после sed-замен)
+2. JS/OWL компоненты — проверить вручную на работающем Odoo 19 (файлы `dms/static/src/js/**/*.esm.js`, `dms_field/static/src/**/*.esm.js`)
+3. `dms_security_mixin.py` — `NEGATIVE_TERM_OPERATORS` ещё импортируется из `odoo.osv.expression`; если этот импорт удалён в Odoo 19, нужно определить константу локально
