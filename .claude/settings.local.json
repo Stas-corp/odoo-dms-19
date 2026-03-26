@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rn \"\"version\"\" */ __manifest__.py)",
+      "Bash(grep -rn \"odoo\\\\.osv\\\\.expression\\\\|from odoo\\\\.osv import expression\\\\|osv\\\\.expression\\\\.\" . --include=*.py)",
+      "Bash(grep -rn .read_group\\\\\\(. --include=*.py)",
+      "Bash(grep -rn read_group . --include=*.py)",
+      "Bash(sed -i \"s/auto_join=True/bypass_search_access=True/g; s/auto_join=False/bypass_search_access=False/g\" dms_field/models/dms_field_mixin.py dms/models/storage.py dms/models/dms_file.py dms/models/directory.py dms/models/access_groups.py)",
+      "Bash(grep -rn auto_join= . --include=*.py)",
+      "Bash(grep -rn odoo */pyproject.toml)",
+      "Bash(grep -rn \"18\\\\.0\\\\|odoo-addon\" . --include=*.toml)",
+      "Bash(grep -rn 18.0 . --include=*.toml)",
+      "Bash(grep -rn 18.0 . --include=*.cfg)",
+      "Bash(grep -rn \"\"18.0. . --include=*.py --include=*.xml --include=*.toml)",
+      "Bash(grep -rn groups_id . --include=*.py --include=*.xml)",
+      "Bash(grep -rn \"\\\\bself\\\\._cr\\\\b\\\\|\\\\bself\\\\._uid\\\\b\\\\|\\\\bself\\\\._context\\\\b\" . --include=*.py)",
+      "Bash(grep -rn \"odoo\\\\.osv\\\\.expression\\\\|from odoo\\\\.osv import expression\" . --include=*.py)",
+      "Bash(grep -rn _sql_constraints . --include=*.py)",
+      "Bash(grep -rn .read_groupb . --include=*.py)",
+      "Bash(grep -rn type=\"\"json\"\" . --include=*.py)",
+      "Bash(grep -rn toggle_active . --include=*.py --include=*.xml)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rebase:*)"
+    ]
+  }
+}

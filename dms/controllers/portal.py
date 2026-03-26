@@ -5,8 +5,8 @@ import base64
 from typing import Optional  # noqa # pylint: disable=unused-import
 
 from odoo import _, http
-from odoo.http import content_disposition, request
 from odoo.fields import Domain
+from odoo.http import content_disposition, request
 
 from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo.addons.web.controllers.utils import ensure_db
