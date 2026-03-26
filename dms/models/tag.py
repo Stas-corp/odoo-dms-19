@@ -45,7 +45,7 @@ class Tag(models.Model):
     count_files = fields.Integer(compute="_compute_count_files")
 
     _constraints = [
-        models.Constraint("name_uniq", "UNIQUE(name, category_id)", "Tag name already exists!"),
+        models.Constraint("UNIQUE(name, category_id)", "Tag name already exists!"),
     ]
 
     @api.depends("directory_ids")
