@@ -280,6 +280,33 @@ class DirectoryTestCaseBase(StorageDatabaseBaseCase):
         with self.assertRaises(AccessError):
             root_directory.with_user(user).unlink()
 
+    def test_complete_group_ids_are_computed_per_directory(self):
+        first_group = self.access_group_model.create(
+            {
+                "name": "First group",
+                "explicit_user_ids": [Command.set([self.dms_user.id])],
+            }
+        )
+        second_group = self.access_group_model.create(
+            {
+                "name": "Second group",
+                "explicit_user_ids": [Command.set([self.dms_manager_user.id])],
+            }
+        )
+        first_directory = self.create_directory(storage=self.storage)
+        second_directory = self.create_directory(storage=self.storage)
+        first_directory.group_ids = [Command.set(first_group.ids)]
+        second_directory.group_ids = [Command.set(second_group.ids)]
+
+        directories = (first_directory | second_directory).with_context(
+            prefetch_fields=False
+        )
+        directories.invalidate_recordset(["group_ids", "complete_group_ids"])
+        directories._compute_groups()
+
+        self.assertEqual(first_directory.complete_group_ids, first_group)
+        self.assertEqual(second_directory.complete_group_ids, second_group)
+
 
 class DirectoryMailTestCase(StorageDatabaseBaseCase):
     @classmethod

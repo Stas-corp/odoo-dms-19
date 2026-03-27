@@ -479,7 +479,7 @@ class DmsDirectory(models.Model):
             groups = one.group_ids
             if one.inherit_group_ids:
                 groups |= one.parent_id.complete_group_ids
-            self.complete_group_ids = groups
+            one.complete_group_ids = groups
 
     # View
     @api.depends("is_root_directory")
